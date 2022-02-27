@@ -1,13 +1,27 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StockPortfolio {
+	List<StockPortfolio> stocks = new ArrayList<StockPortfolio>();
 
 	private String stockName;
 	private int quantity;
 	private double perSharePrice;
 	private double totalSharePrice;
+	private static double total_value;
 
-	//getters and setters
+	// getters and setters
+
+	public List<StockPortfolio> getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(List<StockPortfolio> stocks) {
+		this.stocks = stocks;
+	}
+
 	public String getStockName() {
 		return stockName;
 	}
@@ -38,6 +52,14 @@ public class StockPortfolio {
 
 	public void setTotalSharePrice(double totalSharePrice) {
 		this.totalSharePrice = totalSharePrice;
+	}
+
+	public static double getTotal_value() {
+		return total_value;
+	}
+
+	public static void setTotal_value(double total_value) {
+		StockPortfolio.total_value = total_value;
 	}
 
 	@Override
