@@ -3,50 +3,63 @@ package com.bridgelabz;
 import java.util.Scanner;
 
 public class StockMain {
-	
-	//main function
+
+	// main function
 	public static void main(String[] args) {
 		System.out.println("----Welcome to stock account management program----");
 		Scanner sc = new Scanner(System.in);
-		StockManager sm = new StockManager();                                                      //creating object of StockManager
-		Account accountTest = new Account();
-
+		StockManager func = new StockManager();                              //creating object
 		while (true) {
-			System.out.println(" \n Please enter your choice : " + "\n1.Add Stock" + "\n2.print stock report"
-					+ "\n3.Credit amount"+"\n4.Debit amount"+ "\n5.Check Account Balance" +"\n6.Exit program");
-			
-			int choice = sc.nextInt();
-			
-			switch (choice) {
+			System.out.println(" \n Please enter your choice : " + "\n1. Buy Shares\n 2. Sell Shares\n "
+					+ "3. Credit Account\n 4. Debit Account\n "
+					+ "5. Print Account Balance\n 6. Print Portfolio Details\n 7. Exit");
+
+			System.out.print(" Please enter your choice: ");
+			int opt = sc.nextInt();
+			int amount;
+			String symbol;
+
+			//calling functions with switch case
+			switch (opt) {
 			case 1:
-				sm.addStock();
+				System.out.print(" Enter which stock you want to buy: ");
+				symbol = sc.next();
+				System.out.print(" Enter amount to be spent on shares: ");
+				amount = sc.nextInt();
+				func.buy(amount, symbol);
 				break;
-				
+
 			case 2:
-				sm.printStock();
+				System.out.print(" Enter which stock you want to sell: ");
+				symbol = sc.next();
+				System.out.print(" Enter value of shares to be sold: ");
+				amount = sc.nextInt();
+				func.sell(amount, symbol);
 				break;
-				
 			case 3:
-				accountTest.credit();
+				System.out.println("Enter amount to deposit in account : ");
+				amount = sc.nextInt();
+				Account.credit(amount);
 				break;
-				
 			case 4:
-				accountTest.debit();
+				System.out.println("Enter amount to withdraw from account : ");
+				amount = sc.nextInt();
+				Account.debit(amount);
 				break;
-				
 			case 5:
-				accountTest.amountUpdate();
+				func.valueOf();
 				break;
-				
-			case 6:	
-				System.out.println("Exited from stock account management program");
+			case 6:
+				func.printReport();
+				break;
+			case 7:
+				System.out.println(" Exiting stock account management program");
 				sc.close();
 				return;
-				
-			default :
-				System.out.println("Enter valid choice between 1 to 3");
-			}
+			default:
+				System.out.println(" Please enter a valid choice");
 
+			}
 		}
 	}
 }

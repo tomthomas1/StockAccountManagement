@@ -3,42 +3,40 @@ package com.bridgelabz;
 import java.util.Scanner;
 
 public class Account {
-	static int amount = 0;
+
+	static double amount = 0;
 
 	Scanner scan = new Scanner(System.in);
-	StockManager sp = new StockManager();            //creating object
 
-	public static int getAmount() {
+	// getter and setter for amount
+	public static double getAmount() {
 		return amount;
 	}
 
-	public static void setAmount(int amount) {
+	public static void setAmount(double amount) {
 		Account.amount = amount;
 	}
 
-	public void credit() {                                                          // method to credit account
-		System.out.print(" Please enter the amount to credit: ");
-		double credit_value = scan.nextDouble();
+	public static void credit(double credit_value) {                              //method to credit account
 
-		amount += credit_value;                                                      // add credit amount to account
-		System.out.println(" The current balance is : " + amount);
+		double temp_amount = Account.getAmount();                                 //assigning amount balance to temp
+		temp_amount += credit_value;                                              // adding the temp amount with credit amount
+		Account.setAmount(temp_amount);                                           // setting the amount with setters
+		System.out.println(" Updated amount: " + Account.getAmount());            // displaying the amount with the help of getters 
 	}
 
-	public void debit() {                                                           // method to debit account
-		System.out.print(" Please enter the amount to debit: ");
-		double debit_value = scan.nextDouble();
+	public static boolean debit(double debit_value) {                             // method to debit account balance
 
-		if (amount - debit_value < 0) {                                               // checking if the account balance is less than 0 after debit
-			System.out.println(" Insufficient funds ");
-			return;
+		if (Account.getAmount() - debit_value < 0) {                              // if amount value - debit value is greater than alert user
+			System.out.println(" Insufficient funds!");
+			return false;
 		}
 
-		amount -= debit_value;                                                       // debit the  amount from account
-		System.out.println(" The current balance is : " + amount);
+		double temp_amount = Account.getAmount();                                 // assigning the account balance to temp
+		temp_amount -= debit_value;                                               // debit the account 
+		Account.setAmount(temp_amount);                                           // setting the amount
 
+		return true;
 	}
 
-	public void amountUpdate() {                                               // checking account balance
-		System.out.println(" The Account balance is : " + amount);
-	}
 }
